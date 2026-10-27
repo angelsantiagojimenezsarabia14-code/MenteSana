@@ -199,3 +199,93 @@ a:hover {
     border-radius: 8px;
     margin-bottom: 15px;
 }
+.padre_nuevo {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border: 2px solid #0cd5ef;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    align-items: center;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+.divhijo {
+    width: 13%;
+    height: 4rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.rojo { background-color: #ef4444; }
+.verde { background-color: #22c55e; }
+.azul { background-color: #3b82f6; }
+.amarillo { background-color: #eab308; }
+.morado { background-color: #a855f7; }
+.negro { background-color: #1e293b; }
+.naranja { background-color: #f97316; }
+
+footer {
+    background-color: #065f46;
+    padding: 25px 20px;
+    text-align: center;
+    color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
+}
+
+footer p {
+    color: #ffffff;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Modo Oscuro (se activa con .modo_oscuro) */
+.modo_oscuro {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+.modo_oscuro header {
+    background-color: #1e293b !important;
+    border-bottom: 3px solid #38bdf8;
+}
+
+.modo_oscuro .tagmenu {
+    color: #38bdf8 !important;
+}
+
+.modo_oscuro .leftdiv, 
+.modo_oscuro .rightdiv, 
+.modo_oscuro .divcambio, 
+.modo_oscuro .padre_nuevo,
+.modo_oscuro .card {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+}
+
+.modo_oscuro h1, .modo_oscuro h2, .modo_oscuro h3 {
+    color: #38bdf8 !important;
+}
+
+@media (max-width: 850px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    .flex, .padre_1, .padre {
+        flex-direction: column;
+    }
+    .leftdiv, .rightdiv, .hijo {
+        width: 100% !important;
+    }
+    .divhijo {
+        width: 30% !important;
+    }
+}
