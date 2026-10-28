@@ -108,12 +108,15 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Regla para igualar el tamaño de las imágenes de especialistas */
+.card-img-top,
 .imgclass {
-    width: 100%;
-    max-height: 380px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 20px;
+    width: 100% !important;
+    height: 260px !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
 .flex {
@@ -257,37 +260,44 @@ footer p {
     font-size: 1rem;
 }
 
-.modo_oscuro,
-.modo_oscuro body,
-.modo_oscuro main,
-.modo_oscuro .card,
-.modo_oscuro .divcambio,
-.modo_oscuro .leftdiv,
-.modo_oscuro .rightdiv,
-.modo_oscuro .hijo,
-.modo_oscuro .padre_nuevo,
-.modo_oscuro .bg-white,
-.modo_oscuro .bg-light,
-.modo_oscuro .accordion-item,
-.modo_oscuro .accordion-button {
+/* REGLETA CORREGIDA MODO OSCURO */
+body.modo_oscuro,
+body.modo_oscuro main,
+body.modo_oscuro .card,
+body.modo_oscuro .divcambio,
+body.modo_oscuro .leftdiv,
+body.modo_oscuro .rightdiv,
+body.modo_oscuro .hijo,
+body.modo_oscuro .padre_nuevo,
+body.modo_oscuro .bg-white,
+body.modo_oscuro .bg-light,
+body.modo_oscuro .accordion-item,
+body.modo_oscuro .accordion-button {
     background-color: #0f172a !important;
     color: #f8fafc !important;
     border-color: #334155 !important;
 }
 
-.modo_oscuro header {
+body.modo_oscuro header {
     background-color: #1e293b !important;
     border-bottom-color: #38bdf8 !important;
 }
 
-.modo_oscuro h1, .modo_oscuro h2, .modo_oscuro h3, .modo_oscuro h4, .modo_oscuro h5, .modo_oscuro h6,
-.modo_oscuro p, .modo_oscuro span, .modo_oscuro div, .modo_oscuro label,
-.modo_oscuro .text-muted, .modo_oscuro .text-secondary, .modo_oscuro .card-title, .modo_oscuro .card-text {
+body.modo_oscuro h1, body.modo_oscuro h2, body.modo_oscuro h3, 
+body.modo_oscuro h4, body.modo_oscuro h5, body.modo_oscuro h6,
+body.modo_oscuro p, body.modo_oscuro span, body.modo_oscuro div, 
+body.modo_oscuro label, body.modo_oscuro .text-muted, 
+body.modo_oscuro .text-secondary, body.modo_oscuro .card-title, 
+body.modo_oscuro .card-text {
     color: #f8fafc !important;
 }
 
-.modo_oscuro .tagmenu {
+body.modo_oscuro .tagmenu {
     color: #38bdf8 !important;
+}
+
+body.modo_oscuro iframe {
+    filter: grayscale(20%) invert(90%);
 }
 
 @media (max-width: 992px) {

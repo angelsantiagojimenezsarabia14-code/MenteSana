@@ -1,21 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Alternador de tema oscuro
     const btnTheme = document.querySelector('#btn_cambio');
     const body = document.body;
+
+    if (localStorage.getItem('theme_mode') === 'dark') {
+        body.classList.add('modo_oscuro');
+    }
 
     if (btnTheme) {
         btnTheme.addEventListener('click', () => {
             body.classList.toggle('modo_oscuro');
+            if (body.classList.contains('modo_oscuro')) {
+                localStorage.setItem('theme_mode', 'dark');
+            } else {
+                localStorage.setItem('theme_mode', 'light');
+            }
         });
     }
-});
-const appointmentForm = document.querySelector('#appointmentForm');
+    const appointmentForm = document.querySelector('#appointmentForm');
     const formAlertContainer = document.querySelector('#formAlertContainer');
     const savedAppointmentsContainer = document.querySelector('#savedAppointmentsContainer');
 
+    if (savedAppointmentsContainer) {
+        renderSavedAppointments();
+    }
+
     if (appointmentForm) {
         appointmentForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Evita la recarga de página
+            e.preventDefault();
 
             const nombre = document.querySelector('#nombreInput').value.trim();
             const email = document.querySelector('#emailInput').value.trim();
@@ -44,32 +55,40 @@ const appointmentForm = document.querySelector('#appointmentForm');
             };
 
             guardarEnLocalStorage(nuevaCita);
+
+            formAlertContainer.innerHTML = `
+                <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                    <strong>¡Solicitud de Turno Exitosa!</strong> Se ha registrado la pre-consulta para ${nombre}.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    title: '¡Resumen del Turno!',
+                    html: `
+                        <div class="text-start">
+                            <p><strong>Paciente:</strong> ${nombre}</p>
+                            <p><strong>Motivo:</strong> ${motivo}</p>
+                            <p><strong>Modalidad:</strong> ${modalidad}</p>
+                            <p><strong>Correo:</strong> ${email}</p>
+                        </div>
+                    `,
+                    icon: 'success',
+                    confirmButtonText: 'Entendido y Confirmar',
+                    confirmButtonColor: '#10b981'
+                });
+            }
+
+            appointmentForm.reset();
+            renderSavedAppointments();
         });
     }
+
     function guardarEnLocalStorage(cita) {
         let citas = JSON.parse(localStorage.getItem('citas_mentesana')) || [];
         citas.push(cita);
         localStorage.setItem('citas_mentesana', JSON.stringify(citas));
-
-        if (typeof Swal !== 'undefined') {
-            Swal.fire({
-                title: '¡Resumen del Turno!',
-                html: `
-                    <div class="text-start">
-                        <p><strong>Paciente:</strong> ${cita.nombre}</p>
-                        <p><strong>Motivo:</strong> ${cita.motivo}</p>
-                        <p><strong>Modalidad:</strong> ${cita.modalidad}</p>
-                        <p><strong>Correo:</strong> ${cita.email}</p>
-                    </div>
-                `,
-                icon: 'success',
-                confirmButtonText: 'Entendido y Confirmar',
-                confirmButtonColor: '#10b981'
-            });
-        }
-
-        if (appointmentForm) appointmentForm.reset();
-        renderSavedAppointments();
     }
 
     function renderSavedAppointments() {
@@ -92,7 +111,4 @@ const appointmentForm = document.querySelector('#appointmentForm');
             </div>
         `).join('');
     }
-
-    if (savedAppointmentsContainer) {
-        renderSavedAppointments();
-    }
+});
