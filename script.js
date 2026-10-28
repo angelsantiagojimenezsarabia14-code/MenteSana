@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Modo Oscuro persistente
     const btnTheme = document.querySelector('#btn_cambio');
     const body = document.body;
 
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Interceptación y validación avanzada del formulario
     const appointmentForm = document.querySelector('#appointmentForm');
     const formAlertContainer = document.querySelector('#formAlertContainer');
     const savedAppointmentsContainer = document.querySelector('#savedAppointmentsContainer');
@@ -43,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const modalidad = modalidadInput ? modalidadInput.value : 'Online';
             const descripcion = descripcionTextarea.value.trim();
 
-            // Arreglo para identificar qué campos específicos faltan por llenar
+    
             const camposFaltantes = [];
 
             if (!nombre) camposFaltantes.push('Nombre Completo');
@@ -51,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!motivo) camposFaltantes.push('Motivo de Consulta');
             if (!descripcion) camposFaltantes.push('Descripción del Motivo');
 
-            // Si hay campos faltantes, muestra una alerta detallada con los campos requeridos
             if (camposFaltantes.length > 0) {
                 formAlertContainer.innerHTML = `
                     <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
