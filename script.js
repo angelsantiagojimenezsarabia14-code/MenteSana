@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Modo Oscuro persistente
     const btnTheme = document.querySelector('#btn_cambio');
     const body = document.body;
 
@@ -16,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Interceptación y validación avanzada del formulario
     const appointmentForm = document.querySelector('#appointmentForm');
     const formAlertContainer = document.querySelector('#formAlertContainer');
     const savedAppointmentsContainer = document.querySelector('#savedAppointmentsContainer');
@@ -28,17 +31,34 @@ document.addEventListener('DOMContentLoaded', () => {
         appointmentForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const nombre = document.querySelector('#nombreInput').value.trim();
-            const email = document.querySelector('#emailInput').value.trim();
-            const motivo = document.querySelector('#motivoSelect').value;
+            const nombreInput = document.querySelector('#nombreInput');
+            const emailInput = document.querySelector('#emailInput');
+            const motivoSelect = document.querySelector('#motivoSelect');
+            const descripcionTextarea = document.querySelector('#descripcionTextarea');
             const modalidadInput = document.querySelector('input[name="modalidadRadio"]:checked');
-            const modalidad = modalidadInput ? modalidadInput.value : 'Online';
-            const descripcion = document.querySelector('#descripcionTextarea').value.trim();
 
-            if (!nombre || !email || !motivo || !descripcion) {
+            const nombre = nombreInput.value.trim();
+            const email = emailInput.value.trim();
+            const motivo = motivoSelect.value;
+            const modalidad = modalidadInput ? modalidadInput.value : 'Online';
+            const descripcion = descripcionTextarea.value.trim();
+
+            // Arreglo para identificar qué campos específicos faltan por llenar
+            const camposFaltantes = [];
+
+            if (!nombre) camposFaltantes.push('Nombre Completo');
+            if (!email) camposFaltantes.push('Correo Electrónico');
+            if (!motivo) camposFaltantes.push('Motivo de Consulta');
+            if (!descripcion) camposFaltantes.push('Descripción del Motivo');
+
+            // Si hay campos faltantes, muestra una alerta detallada con los campos requeridos
+            if (camposFaltantes.length > 0) {
                 formAlertContainer.innerHTML = `
                     <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
-                        <strong>Campos incompletos:</strong> Por favor llena todos los campos marcados con asterisco (*).
+                        <strong><i class="fa-solid fa-triangle-exclamation me-2"></i>Por favor completa los siguientes apartados requeridos:</strong>
+                        <ul class="mb-0 mt-2">
+                            ${camposFaltantes.map(campo => `<li>${campo}</li>`).join('')}
+                        </ul>
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 `;
