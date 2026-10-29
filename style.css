@@ -107,8 +107,6 @@ a {
 a:hover {
     text-decoration: underline;
 }
-
-/* Regla para igualar el tamaño de las imágenes de especialistas */
 .card-img-top,
 .imgclass {
     width: 100% !important;
